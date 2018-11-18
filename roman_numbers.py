@@ -57,5 +57,4 @@ def get_roman_number(arabic_number):
 
 
 if __name__ == "__main__":
-    arabic_number = number_input()
-    print("The roman number: {}".format(get_roman_number(arabic_number)))
+    print("The roman number: {}".format(get_roman_number(number_input())))
