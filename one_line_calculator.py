@@ -1,4 +1,5 @@
 # This program can do simple calculations from a single line input.
+import sys
 
 
 def add(x, y):
@@ -35,34 +36,44 @@ def calculate(x, y, symbol):
 
 
 def abc():
-    input_equation = input("Enter your equation: ")
-    equation = "".join(input_equation)
-    number1 = []
-    number2 = []
-    symbols = ["+", "-", "*", "/"]
-    sign = None
+    while True:
+        input_equation = input("Enter your equation: ")
 
-    for character in equation:
-        if sign is None:
-            if character.isdigit():
-                number1.append(character)
-            elif character in symbols:
-                sign = character
-        else:
-            if character.isdigit():
-                number2.append(character)
+        if "exit" in input_equation:
+            sys.exit()
 
-    print(number1)
-    print(sign)
-    print(number2)
+        equation = "".join(input_equation)
+        number1 = []
+        number2 = []
+        symbols = ["+", "-", "*", "/"]
+        sign = None
 
-    num1 = int("".join(number1))
-    num2 = int("".join(number2))
+        for character in equation:
+            if sign is None:
+                if character.isdigit():
+                    number1.append(character)
+                elif character in symbols:
+                    sign = character
+            else:
+                if character.isdigit():
+                    number2.append(character)
 
-    result = calculate(num1, num2, sign)
+        if len(number1) == 0 or len(number2) == 0 or sign is None:
+            print("Please write full equation!")
+            continue
 
-    return result
+        print(number1)
+        print(sign)
+        print(number2)
+
+        num1 = int("".join(number1))
+        num2 = int("".join(number2))
+
+        result = calculate(num1, num2, sign)
+
+        return result
 
 
 if __name__ == "__main__":
-    print(abc())
+    while True:
+        print(abc())
