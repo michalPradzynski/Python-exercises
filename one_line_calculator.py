@@ -45,7 +45,7 @@ def abc():
         equation = "".join(input_equation)
         number1 = []
         number2 = []
-        symbols = ["+", "-", "*", "/"]
+        symbols = ["+", "-", "*", "/", "^"]
         sign = None
 
         for character in equation:
@@ -61,10 +61,6 @@ def abc():
         if len(number1) == 0 or len(number2) == 0 or sign is None:
             print("Please write full equation!")
             continue
-
-        print(number1)
-        print(sign)
-        print(number2)
 
         num1 = int("".join(number1))
         num2 = int("".join(number2))
