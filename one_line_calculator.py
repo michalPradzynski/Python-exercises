@@ -62,6 +62,8 @@ def calculator():
             print("Please write full equation!")
             continue
 
+        print(number1, sign, number2)
+
         num1 = int("".join(number1))
         num2 = int("".join(number2))
 
