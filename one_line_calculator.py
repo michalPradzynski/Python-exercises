@@ -35,7 +35,7 @@ def calculate(x, y, symbol):
         return power(x, y)
 
 
-def abc():
+def calculator():
     while True:
         input_equation = input("Enter your equation: ")
 
@@ -72,4 +72,4 @@ def abc():
 
 if __name__ == "__main__":
     while True:
-        print(abc())
+        print(calculator())
