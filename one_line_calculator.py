@@ -21,26 +21,27 @@ def divide(x, y):
 def power(x, y):
     return x ** y
 
+
 def get_input():
     print("One Line Calculator v2.0")
     input_equation = input("Enter your equation: ")
 
-        if "exit" in input_equation:
-            sys.exit()
+    if "exit" in input_equation:
+        sys.exit()
 
     return "".join(input_equation)
 
 
-def calculate(x, y, symbol):
-    if symbol == "+":
+def calculate(x, y, operator):
+    if operator == "+":
         return add(x, y)
-    elif symbol == "-":
+    elif operator == "-":
         return subtract(x, y)
-    elif symbol == "*":
+    elif operator == "*":
         return multiply(x, y)
-    elif symbol == "/":
+    elif operator == "/":
         return divide(x, y)
-    elif symbol == "^":
+    elif operator == "^":
         return power(x, y)
 
 
@@ -53,7 +54,7 @@ def simple_calculation(equation):
                 if operator is None:
                     if character.isdigit():
                         number1.append(character)
-                    elif character in symbols:
+                    elif character in arithmetic_operators:
                         operator = character
                 else:
                     if character.isdigit():
@@ -67,18 +68,35 @@ def simple_calculation(equation):
     return simple_result
 
 
+def separate_equation(equation):
+    arithmetic_operators = ["+", "-", "*", "/", "^"]
+    operators = []
+    numbers = []
+    temp_number = []
+
+    for character in equation:
+        if character.isdigit():
+            temp_number.append(character)
+        elif character in arithmetic_operators:
+            operators.append(character)
+            numbers.append(int("".join(temp_number)))
+            temp_number = []
+
+    return (operators, numbers)
+
+
 
 def calculator():
     while True:
         equation = get_input()
         equation_parts = []
 
-        symbols = ["+", "-", "*", "/", "^"]
+        arithmetic_operators = ["+", "-", "*", "/", "^"]
         how_many_operators = 0
         operator = None
 
         for character in equation:
-            if character in symbols:
+            if character in arithmetic_operators:
                 how_many_operators += 1
             if character == "*" or character == "/" or character == "^":
                 pass
@@ -90,7 +108,7 @@ def calculator():
                 if operator is None:
                     if character.isdigit():
                         number1.append(character)
-                    elif character in symbols:
+                    elif character in arithmetic_operators:
                         operator = character
                 else:
                     if character.isdigit():
