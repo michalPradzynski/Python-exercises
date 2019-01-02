@@ -85,6 +85,21 @@ def separate_equation(equation):
     return (operators, numbers)
 
 
+def get_calculation_order(operators):
+    ordered_symbols = []
+
+    for index, symbol in enumerate(operators):
+        if symbol == "^":
+            ordered_symbols.append((0, symbol))
+        elif symbol == "*" or symbol == "/":
+            ordered_symbols.append((1, symbol))
+        else:
+            ordered_symbols.append((2, symbol))
+
+    ordered_symbols.sort(key=lambda order: order[0])
+
+    return ordered_symbols
+
 
 def calculator():
     while True:
