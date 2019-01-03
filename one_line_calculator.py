@@ -45,27 +45,23 @@ def calculate(x, y, operator):
         return power(x, y)
 
 
-def simple_calculation(equation):
-    number1 = []
-    number2 = []
+def simple_calculation(numbers, operators):
+    number1 = None
+    number2 = None
     operator = None
 
-    for character in equation:
-                if operator is None:
-                    if character.isdigit():
-                        number1.append(character)
-                    elif character in arithmetic_operators:
-                        operator = character
-                else:
-                    if character.isdigit():
-                        number2.append(character)
+    while len(numbers) >= 1:
+        operator_index = get_calculation_order(operators)[0][1] #ordered_operators[0][1]
+        number1 = numbers.pop(operator_index)
+        number2 = numbers.pop(operator_index)
+        operator = operators.pop(operator_index)
+        ordered_operators.pop(operator_index)
 
-    num1 = int("".join(number1))
-    num2 = int("".join(number2))
+        numbers.insert(operator_index, calculate(number1, number2, operator))
 
-    simple_result = calculate(num1, num2, operator)
+    result = numbers[0]
 
-    return simple_result
+    return result
 
 
 def separate_equation(equation):
@@ -81,6 +77,8 @@ def separate_equation(equation):
             operators.append(character)
             numbers.append(int("".join(temp_number)))
             temp_number = []
+        else:
+            raise ValueError("Wrong operator used!")
 
     return (operators, numbers)
 
@@ -90,11 +88,11 @@ def get_calculation_order(operators):
 
     for index, symbol in enumerate(operators):
         if symbol == "^":
-            ordered_symbols.append((0, symbol))
+            ordered_symbols.append((0, index, symbol))
         elif symbol == "*" or symbol == "/":
-            ordered_symbols.append((1, symbol))
+            ordered_symbols.append((1, index, symbol))
         else:
-            ordered_symbols.append((2, symbol))
+            ordered_symbols.append((2, index, symbol))
 
     ordered_symbols.sort(key=lambda order: order[0])
 
