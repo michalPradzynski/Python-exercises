@@ -9,7 +9,7 @@ def number_input():
             print("Not a number!")
 
         if arabic_number < 0 or arabic_number > 4000:
-            print("A number must from range 0 - 4000!")
+            print("A number must be from range 0 - 4000!")
         else:
             return arabic_number
 
